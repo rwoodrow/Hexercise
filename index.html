@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Binary &amp; Hexadecimal Questions</title>
+  <style>
+    :root {
+      --cream: #ffffe6;
+      --grey: #808080;
+      --band: #c0c0c0;
+      --red: #00534c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Verdana, Geneva, sans-serif;
+      margin: 0;
+      padding: 12px;
+      background: #fff;
+      color: #000;
+    }
+
+    .wrap {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* Banner. Drop your own logo into the .logo-slot element if you want one. */
+    .banner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-height: 96px;
+      padding: 8px 24px;
+      background: var(--cream);
+      border: 4px solid #00534c;
+      border-radius: 56px 56px 56px 56px;
+    }
+
+    .logo-slot {
+      flex: 0 0 auto;
+      font-family: Karla, Verdana, sans-serif;
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #6a1b9a;
+      line-height: 1;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+
+    .logo {
+      height: 80px;
+      width: auto;
+      flex: 0 0 auto;
+    }
+
+    .banner h1 {
+      flex: 1;
+      margin: 0;
+      text-align: center;
+      font-family: Karla, Verdana, sans-serif;
+      font-weight: normal;
+      font-size: clamp(1.8rem, 6vw, 3.2rem);
+      color: var(--red);
+    }
+
+    h2 {
+      text-align: center;
+      margin: 14px 0 14px;
+      font-size: 1.5rem;
+    }
+
+    .panel {
+      border: 1px solid #000;
+    }
+
+    .intro {
+      background: var(--cream);
+      padding: 6px 12px;
+      font-size: .78rem;
+    }
+
+    .intro p {
+      margin: 8px 0;
+    }
+
+    table.types {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table.types th {
+      background: var(--grey);
+      color: #fff;
+      font-weight: normal;
+      text-align: center;
+      padding: 6px 4px;
+    }
+
+    table.types th:first-child {
+      text-align: left;
+      padding-left: 6px;
+      font-size: 1.05rem;
+    }
+
+    table.types td {
+      padding: 5px 6px;
+      font-size: 1rem;
+    }
+
+    table.types tbody tr:nth-child(odd) {
+      background: #fff;
+    }
+
+    table.types tbody tr:nth-child(even) {
+      background: var(--band);
+    }
+
+    td.c {
+      text-align: center;
+      width: 58px;
+    }
+
+    td.star {
+      color: #8b4513;
+      font-size: 1.2rem;
+    }
+
+    td.name label {
+      cursor: pointer;
+      display: block;
+    }
+
+    .lvl {
+      font: inherit;
+      font-size: .75rem;
+      background: #f0f0f0;
+      border: 1px solid #999;
+      padding: 1px 6px;
+      cursor: pointer;
+    }
+
+    .foot {
+      background: var(--grey);
+      color: #fff;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 14px;
+      padding: 8px 6px;
+    }
+
+    .foot label {
+      font-size: 1.05rem;
+    }
+
+    .foot input[type=text],
+    .foot input[type=number] {
+      background: var(--cream);
+      border: 2px solid #555;
+      padding: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+
+    #code {
+      width: 130px;
+    }
+
+    #count {
+      width: 90px;
+    }
+
+    .btn {
+      font: inherit;
+      font-size: 1.2rem;
+      padding: 6px 14px;
+      background: #f0f0f0;
+      border: 1px solid #999;
+      cursor: pointer;
+    }
+
+    .btn.small {
+      font-size: .8rem;
+      padding: 4px 8px;
+    }
+
+    #msg {
+      color: #b00000;
+      padding: 6px 12px;
+      font-size: .9rem;
+      display: none;
+      background: #fff;
+    }
+
+    .printonly {
+      display: none;
+    }
+
+    #questions {
+      margin-top: 14px;
+    }
+
+    .q {
+      display: grid;
+      grid-template-columns: 3rem 1fr auto;
+      gap: 8px 12px;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid #000;
+    }
+
+    .num {
+      color: var(--red);
+      font-size: 2.2rem;
+      font-family: Karla, Verdana, sans-serif;
+      text-align: center;
+    }
+
+    .text {
+      font-size: .9rem;
+      line-height: 1.5;
+    }
+
+    .ans {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .ans .pre {
+      font-size: .9rem;
+    }
+
+    .ans input {
+      width: 170px;
+      font-size: 1rem;
+      font-family: inherit;
+      padding: 7px;
+      background: var(--cream);
+      border: 2px solid #444;
+    }
+
+    .ans input.ok {
+      background: #8ee08e;
+    }
+
+    .ans input.bad {
+      background: #ff8a8a;
+    }
+
+    .ans button {
+      font: inherit;
+      font-size: 1.1rem;
+      padding: 6px 10px;
+      background: #f0f0f0;
+      border: 1px solid #999;
+      cursor: pointer;
+    }
+
+    .mark {
+      font-size: .8rem;
+      min-width: 5.5em;
+    }
+
+    .solution {
+      display: none;
+      grid-column: 2 / -1;
+      color: #064d06;
+      font-size: .85rem;
+      font-style: italic;
+    }
+
+    .showans .solution {
+      display: block;
+    }
+
+    .written .q {
+      min-height: 12rem;
+      align-items: start;
+    }
+
+    .written .ans {
+      display: none;
+    }
+
+    @media (max-width:640px) {
+      .q {
+        grid-template-columns: 2.5rem 1fr;
+      }
+
+      .ans {
+        grid-column: 2;
+        flex-wrap: wrap;
+      }
+
+      .foot label {
+        font-size: .95rem;
+      }
+    }
+
+    @media print {
+      body {
+        padding: 0;
+      }
+
+      .banner,
+      h2,
+      .panel,
+      #msg {
+        display: none !important;
+      }
+
+      .printonly {
+        display: block;
+        font-size: .9rem;
+        margin-bottom: 8px;
+      }
+
+      .ans button,
+      .mark {
+        display: none;
+      }
+
+      .q {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="banner">
+      <!-- Binary Logo Hidden 
+      <div class="logo-slot" aria-hidden="true">0101<br>1010</div>-->
+      <img class="logo" src="logo.png" alt="College logo">
+      <h1>Computing Practice</h1>
+    </div>
+    <h2>Binary &amp; Hexadecimal Questions</h2>
+
+    <div class="panel">
+      <div class="intro">
+        <p>Automatic random question generator for binary and hexadecimal conversion and arithmetic.</p>
+        <p>Enter any value in the question code box to get a particular, repeatable set of random questions.
+          <br>... Leave it blank for a fresh set.
+        </p>
+        <p>Work out each answer on paper, type it in and press Check.</pp>
+        <p>If you are going to print the questions, tick &lsquo;Written Test&rsquo; to leave room for showing working.
+        </p>
+      </div>
+      <table class="types">
+        <thead>
+          <tr>
+            <th>Questions</th>
+            <th><button type="button" class="lvl" data-level="none">None</button></th>
+            <th><button type="button" class="lvl" data-level="GCSE">GCSE</button></th>
+            <th><button type="button" class="lvl" data-level="H446">H446</button></th>
+            <th><button type="button" class="lvl" data-level="AS">AS</button></th>
+            <th><button type="button" class="lvl" data-level="A2">A2</button></th>
+
+          </tr>
+        </thead>
+        <tbody id="typeRows"></tbody>
+      </table>
+      <div id="msg" role="alert"></div>
+      <div class="foot">
+        <label for="code">Question<br>code:</label>
+        <input type="text" id="code" inputmode="numeric" autocomplete="off">
+        <button type="button" class="btn small" id="rand" title="Put a new random code in the box">Random</button>
+        <label for="count">How many<br>questions:</label>
+        <input type="number" id="count" min="1" max="50" value="10">
+        <label for="written">Written<br>Test <input type="checkbox" id="written"></label>
+        <label for="answers">Show<br>answers <input type="checkbox" id="answers"></label>
+        <button type="button" class="btn" id="refresh">Refresh</button>
+      </div>
+    </div>
+
+    <div id="printInfo" class="printonly"></div>
+    <div id="questions"></div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* ---------- seeded random numbers ---------- */
+      function hashSeed(s) {
+        s = String(s).trim();
+        var h = 2166136261 >>> 0;
+        for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+        return h >>> 0;
+      }
+      function mulberry32(a) {
+        return function () {
+          a = (a + 0x6D2B79F5) | 0;
+          var t = Math.imul(a ^ (a >>> 15), 1 | a);
+          t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+      var ri = function (r, a, b) { return a + Math.floor(r() * (b - a + 1)); };
+      var pick = function (r, arr) { return arr[Math.floor(r() * arr.length)]; };
+
+      /* ---------- number helpers ---------- */
+      var P = function (n) { return Math.pow(2, n); };
+      var toBin = function (n, w) { var s = n.toString(2); while (s.length < (w || 0)) s = '0' + s; return s; };
+      var toHex = function (n) { return n.toString(16).toUpperCase(); };
+      var tcStr = function (n, w) { return toBin(n >= 0 ? n : n + P(w), w); };
+      var fpVal = function (m, e, M) { return m * P(e - (M - 1)); };
+      var bold = function (x) { return '<b>' + x + '</b>'; };
+
+      /* ---------- answer checkers (all take the student's raw text) ---------- */
+      var clean = function (s) { return String(s).trim().replace(/[\s_]/g, ''); };
+      var chk = {
+        str: function (exp) { return function (s) { return clean(s).replace(/^0b/i, '') === exp; }; },
+        binVal: function (v) { return function (s) { s = clean(s).replace(/^0b/i, ''); return /^[01]+$/.test(s) && parseInt(s, 2) === v; }; },
+        dec: function (v) { return function (s) { s = clean(s); return /^[+-]?\d+$/.test(s) && Number(s) === v; }; },
+        hex: function (v) { return function (s) { s = clean(s).replace(/^0x/i, ''); return /^[0-9a-f]+$/i.test(s) && parseInt(s, 16) === v; }; },
+        real: function (v) {
+          return function (s) {
+            s = clean(s);
+            return /^[+-]?(\d+\.?\d*|\.\d+)$/.test(s) && Number(s) === v; /* values are exact binary fractions, so exact match is safe */
+          };
+        },
+        binFrac: function (v) {
+          return function (s) {
+            s = clean(s);
+            if (!/^[01]*\.?[01]*$/.test(s) || !/[01]/.test(s)) return false;
+            var p = s.split('.'), x = parseInt(p[0] || '0', 2), f = p[1] || '';
+            for (var i = 0; i < f.length; i++) x += (+f[i]) / P(i + 1);
+            return Math.abs(x - v) < 1e-12;
+          };
+        }
+      };
+      var Q = function (html, answer, check, extra) {
+        return Object.assign({ html: html, answer: String(answer), check: check, prefix: '' }, extra || {});
+      };
+
+      /* ---------- question generators ---------- */
+      function gBinWhole(r) {
+        if (r() < 0.5) {
+          var bits = pick(r, [4, 5, 6, 7, 8]), n = ri(r, P(bits - 1), P(bits) - 1);
+          return Q('Convert ' + bold(n) + ' to ' + bold(bits) + ' bit binary:', toBin(n, bits), chk.str(toBin(n, bits)));
+        }
+        var b2 = pick(r, [4, 6, 8]), m = ri(r, 1, P(b2) - 1);
+        return Q('Convert ' + bold(toBin(m, b2)) + ' from binary to denary', m, chk.dec(m));
+      }
+      function gBinAdd(r) {
+        var bits = pick(r, [6, 7, 8]);
+        var a = ri(r, P(bits - 3), P(bits - 1) - 1), b = ri(r, P(bits - 3), P(bits - 1) - 1);
+        return Q('Add ' + bold(toBin(a, bits)) + ' and ' + bold(toBin(b, bits)) + ' in binary:', toBin(a + b, bits), chk.binVal(a + b));
+      }
+      function gBinSub(r) {
+        var bits = pick(r, [6, 7, 8]);
+        var a = ri(r, P(bits - 2), P(bits) - 1), b = ri(r, 1, a - 1);
+        return Q('Subtract ' + bold(toBin(b, bits)) + ' from ' + bold(toBin(a, bits)) + ' in binary:', toBin(a - b, bits), chk.binVal(a - b));
+      }
+      function gBinMul(r) {
+        var wa = ri(r, 4, 5), wb = ri(r, 3, 4);
+        var a = ri(r, P(wa - 1), P(wa) - 1), b = ri(r, P(wb - 1), P(wb) - 1);
+        return Q('Multiply ' + bold(toBin(a, wa)) + ' by ' + bold(toBin(b, wb)) + ' in binary:', toBin(a * b), chk.binVal(a * b));
+      }
+      function hexDen(r, lo, hi) {
+        var n = ri(r, lo, hi);
+        if (r() < 0.5) return Q('Convert 0x' + bold(toHex(n)) + ' from hexadecimal to denary', n, chk.dec(n));
+        return Q('Convert ' + bold(n) + ' from denary to hexadecimal', toHex(n), chk.hex(n), { prefix: '0x' });
+      }
+      function gHexDen(r) { return hexDen(r, 16, 255); }
+      function gHexDenAdv(r) { return hexDen(r, 256, 65535); }
+      function gHexBin(r) {
+        var d = pick(r, [2, 3]);
+        if (r() < 0.5) {
+          var n = ri(r, 1, Math.pow(16, d) - 1), h = toHex(n);
+          while (h.length < d) h = '0' + h;
+          return Q('Convert ' + bold(toBin(n, 4 * d)) + ' from binary to hexadecimal', h, chk.hex(n), { prefix: '0x' });
+        }
+        var m = ri(r, Math.pow(16, d - 1), Math.pow(16, d) - 1);
+        return Q('Convert 0x' + bold(toHex(m)) + ' from hexadecimal to ' + bold(4 * d) + ' bit binary', toBin(m, 4 * d), chk.str(toBin(m, 4 * d)));
+      }
+      function gHexBinAdv(r) {
+        var L = pick(r, [6, 7, 9, 10, 11, 13, 14, 16, 18, 20]), n = ri(r, P(L - 1), P(L) - 1);
+        if (r() < 0.5) return Q('Convert ' + bold(toBin(n, L)) + ' from binary to hexadecimal', toHex(n), chk.hex(n), { prefix: '0x' });
+        return Q('Convert 0x' + bold(toHex(n)) + ' from hexadecimal to ' + bold(L) + ' bit binary', toBin(n, L), chk.str(toBin(n, L)));
+      }
+      function gTwos(r) {
+        var bits = pick(r, [4, 6, 8]), lo = -P(bits - 1), hi = P(bits - 1) - 1, k = ri(r, 0, 2);
+        if (k === 0) {
+          var n = ri(r, lo, -1);
+          return Q('Convert ' + bold(n) + ' to ' + bold(bits) + ' bit two\'s complement binary:', tcStr(n, bits), chk.str(tcStr(n, bits)));
+        }
+        if (k === 1) {
+          var m = ri(r, lo, hi);
+          return Q('Convert ' + bold(tcStr(m, bits)) + ' from ' + bold(bits) + ' bit two\'s complement binary to denary:', m, chk.dec(m));
+        }
+        var a = ri(r, 1, hi);
+        return Q(bold(toBin(a, bits)) + ' is a positive ' + bold(bits) + ' bit binary number. Write its negative in ' + bold(bits) + ' bit two\'s complement binary:', tcStr(-a, bits), chk.str(tcStr(-a, bits)));
+      }
+      function gBinFrac(r) {
+        var ip = ri(r, 1, 31), fb = ri(r, 1, 4), f = ri(r, 0, P(fb - 1) - 1) * 2 + 1;
+        var value = ip + f / P(fb), str = ip.toString(2) + '.' + toBin(f, fb);
+        if (r() < 0.5) return Q('Convert ' + bold(str) + ' from binary to denary:', value, chk.real(value));
+        return Q('Convert ' + bold(value) + ' from denary to binary:', str, chk.binFrac(value));
+      }
+
+      /* floating point: M bit mantissa (point after first bit), E bit exponent, both two's complement */
+      var FP = [[8, 4], [10, 4], [12, 4]];
+      function normMant(r, M) { return r() < 0.5 ? ri(r, P(M - 2), P(M - 1) - 1) : -ri(r, P(M - 2) + 1, P(M - 1)); }
+      function fpIntro(M, E) { return bold(M) + ' bit mantissa and a ' + bold(E) + ' bit exponent, both in two\'s complement'; }
+      function gReal(r) {
+        var pr = pick(r, FP), M = pr[0], E = pr[1], k = ri(r, 0, 2), m, e, v;
+        if (k === 0) {
+          m = normMant(r, M); e = ri(r, -3, 6); v = fpVal(m, e, M);
+          return Q('A floating point number is stored with an ' + fpIntro(M, E) + '.<br>Mantissa: ' + bold(tcStr(m, M)) +
+            ' &nbsp; Exponent: ' + bold(tcStr(e, E)) + '<br>Convert it to denary:', v, chk.real(v),
+            { meta: { kind: 'fpval', M: M, E: E, mant: tcStr(m, M), exp: tcStr(e, E), value: v } });
+        }
+        if (k === 1) {
+          m = normMant(r, M); e = ri(r, -1, 6); v = fpVal(m, e, M);
+          var ans = tcStr(m, M) + tcStr(e, E);
+          return Q('Represent ' + bold(v) + ' as a normalised floating point number using an ' + fpIntro(M, E) +
+            '.<br>Enter the mantissa followed by the exponent (' + bold(M + E) + ' digits, no spaces):', ans, chk.str(ans),
+            { meta: { kind: 'fprep', M: M, E: E, value: v } });
+        }
+        var kk = ri(r, 1, 2), mm;
+        if (r() < 0.5) mm = ri(r, P(M - 2 - kk), P(M - 1 - kk) - 1);
+        else mm = -ri(r, P(M - 2 - kk) + 1, P(M - 1 - kk));
+        e = ri(r, -3, 5);
+        var res = tcStr(mm * P(kk), M) + tcStr(e, E);
+        return Q('This floating point number (' + fpIntro(M, E) + ') is not normalised.<br>Mantissa: ' + bold(tcStr(mm, M)) +
+          ' &nbsp; Exponent: ' + bold(tcStr(e + kk, E)) + '<br>Normalise it. Enter the mantissa followed by the exponent (' +
+          bold(M + E) + ' digits, no spaces):', res, chk.str(res),
+          { meta: { kind: 'fpnorm', M: M, E: E, mant: tcStr(mm, M), exp: tcStr(e + kk, E) } });
+      }
+      function fpNormalise(m, e, M, E) {
+        if (m === 0) return null;
+        var lo = -P(M - 1), hi = P(M - 1) - 1;
+        var isNorm = function (x) { return (x >= P(M - 2) && x <= hi) || (x <= -P(M - 2) - 1 && x >= lo); };
+        var guard = 0;
+        while (!isNorm(m) && guard++ < 64) {
+          if (m > hi || m < lo) { if (m % 2 !== 0) return null; m /= 2; e++; }
+          else { m *= 2; e--; }
+        }
+        if (!isNorm(m)) return null;
+        if (e < -P(E - 1) || e > P(E - 1) - 1) return null;
+        return { m: m, e: e };
+      }
+      function gFpAdd(r) {
+        for (var tries = 0; tries < 2000; tries++) {
+          var pr = pick(r, FP), M = pr[0], E = pr[1], sub = r() < 0.5;
+          var ea = ri(r, -2, 4), eb = Math.max(-P(E - 1), Math.min(P(E - 1) - 1, ea + ri(r, -3, 3)));
+          var ma = normMant(r, M), mb = normMant(r, M), emin = Math.min(ea, eb);
+          var T = ma * P(ea - emin) + (sub ? -1 : 1) * mb * P(eb - emin);
+          var res = fpNormalise(T, emin, M, E);
+          if (!res) continue;
+          var ans = tcStr(res.m, M) + tcStr(res.e, E);
+          return Q('Calculate A ' + (sub ? '&minus;' : '+') + ' B for these floating point numbers (' + fpIntro(M, E) + ').<br>' +
+            'A &nbsp; Mantissa: ' + bold(tcStr(ma, M)) + ' &nbsp; Exponent: ' + bold(tcStr(ea, E)) + '<br>' +
+            'B &nbsp; Mantissa: ' + bold(tcStr(mb, M)) + ' &nbsp; Exponent: ' + bold(tcStr(eb, E)) + '<br>' +
+            'Give the normalised result: mantissa followed by exponent (' + bold(M + E) + ' digits, no spaces):', ans, chk.str(ans),
+            { meta: { kind: 'fpadd', M: M, E: E, op: sub ? '-' : '+', A: [tcStr(ma, M), tcStr(ea, E)], B: [tcStr(mb, M), tcStr(eb, E)] } });
+        }
+        return gReal(r); /* practically unreachable fallback */
+      }
+
+      var TYPES = [
+        { id: 'binwhole', name: 'Binary whole numbers', lv: ['GCSE', 'AS', 'A2', 'H446'], gen: gBinWhole },
+        { id: 'binadd', name: 'Binary addition', lv: ['GCSE', 'AS', 'A2', 'H446'], gen: gBinAdd },
+        { id: 'binsub', name: 'Binary subtraction', lv: ['AS', 'A2', 'H446'], gen: gBinSub },
+        { id: 'binmul', name: 'Binary multiplication', lv: ['A2'], gen: gBinMul },
+        { id: 'hexden', name: 'Hexadecimal & Denary', lv: ['GCSE', 'AS', 'A2', 'H446'], gen: gHexDen },
+        { id: 'hexdenadv', name: 'Hexadecimal & Denary Advanced', lv: ['AS', 'A2', 'H446'], gen: gHexDenAdv },
+        { id: 'hexbin', name: 'Hexadecimal & Binary', lv: ['GCSE', 'AS', 'A2', 'H446'], gen: gHexBin },
+        { id: 'hexbinadv', name: 'Hexadecimal & Binary Advanced', lv: ['AS', 'A2', 'H446'], gen: gHexBinAdv },
+        { id: 'twos', name: 'Binary negative numbers (Two\'s Complement)', lv: ['AS', 'A2', 'H446'], gen: gTwos },
+        { id: 'binfrac', name: 'Binary fractions', lv: ['AS', 'A2', 'H446'], gen: gBinFrac },
+        { id: 'real', name: 'Real numbers (two\'s complement mantissa and exponent)', lv: ['A2', 'H446'], gen: gReal },
+        { id: 'fpadd', name: 'Floating point numbers addition and subtraction', lv: ['A2', 'H446'], gen: gFpAdd }
+      ];
+
+      /* Same seed + same count + same ticked types = same questions. */
+      function generateSet(seed, n, ids) {
+        var r = mulberry32(hashSeed(seed));
+        var sel = TYPES.filter(function (t) { return ids.indexOf(t.id) >= 0; });
+        var out = [], bag = [];
+        if (!sel.length) return out;
+        while (out.length < n) {
+          if (!bag.length) {
+            bag = sel.slice();
+            for (var i = bag.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)); var t = bag[i]; bag[i] = bag[j]; bag[j] = t; }
+          }
+          var ty = bag.pop();
+          out.push(Object.assign(ty.gen(r), { type: ty.id }));
+        }
+        return out;
+      }
+
+      if (typeof module !== 'undefined' && module.exports) {
+        module.exports = { TYPES: TYPES, generateSet: generateSet };
+      }
+
+      /* ---------- page wiring ---------- */
+      if (typeof document === 'undefined') return;
+
+      var el = function (id) { return document.getElementById(id); };
+      var esc = function (s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
+
+      function buildTable() {
+        var body = el('typeRows');
+        TYPES.forEach(function (t) {
+          var tr = document.createElement('tr');
+          tr.innerHTML = '<td class="name"><label for="t_' + t.id + '">' + esc(t.name) + '</label></td>' +
+            '<td class="c"><input type="checkbox" id="t_' + t.id + '"></td>' +
+            ['GCSE', 'H446', 'AS', 'A2'].map(function (l) { return '<td class="c star">' + (t.lv.indexOf(l) >= 0 ? '*' : '') + '</td>'; }).join('');
+          body.appendChild(tr);
+        });
+        Array.prototype.forEach.call(document.querySelectorAll('[data-level]'), function (btn) {
+          btn.addEventListener('click', function () {
+            var lv = btn.getAttribute('data-level');
+            TYPES.forEach(function (t) { el('t_' + t.id).checked = lv !== 'none' && t.lv.indexOf(lv) >= 0; });
+          });
+        });
+      }
+
+      function selectedIds() { return TYPES.filter(function (t) { return el('t_' + t.id).checked; }).map(function (t) { return t.id; }); }
+      function showMsg(text) { var m = el('msg'); m.textContent = text || ''; m.style.display = text ? 'block' : 'none'; }
+
+      function render(qs, code) {
+        var box = el('questions');
+        box.innerHTML = '';
+        box.className = (el('written').checked ? 'written ' : '') + (el('answers').checked ? 'showans' : '');
+        el('printInfo').textContent = 'Binary & Hexadecimal Questions \u2013 question code ' + code + ' (' + qs.length + ' questions)';
+        qs.forEach(function (q, i) {
+          var d = document.createElement('div');
+          d.className = 'q';
+          d.innerHTML = '<div class="num">' + (i + 1) + '</div><div class="text">' + q.html + '</div>' +
+            '<div class="ans">' + (q.prefix ? '<span class="pre">' + q.prefix + '</span>' : '') +
+            '<input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Answer to question ' + (i + 1) + '">' +
+            '<button type="button">Check</button><span class="mark" aria-live="polite"></span></div>' +
+            '<div class="solution">Answer: ' + q.prefix + q.answer + '</div>';
+          var input = d.querySelector('input'), btn = d.querySelector('button'), mark = d.querySelector('.mark');
+          var reset = function () { input.classList.remove('ok', 'bad'); mark.textContent = ''; };
+          btn.addEventListener('click', function () {
+            if (!input.value.trim()) return;
+            var ok = q.check(input.value);
+            input.classList.toggle('ok', ok);
+            input.classList.toggle('bad', !ok);
+            mark.textContent = ok ? '\u2713 Correct' : '\u2717 Try again';
+          });
+          input.addEventListener('input', reset);
+          input.addEventListener('keydown', function (e) { if (e.key === 'Enter') btn.click(); });
+          box.appendChild(d);
+        });
+      }
+
+      function writeHash(code, n, ids, written) {
+        try {
+          var p = 'c=' + encodeURIComponent(code) + '&n=' + n + '&t=' + ids.join(',') + (written ? '&w=1' : '');
+          history.replaceState(null, '', '#' + p);
+        } catch (e) { /* ignore: not essential */ }
+      }
+
+      function refresh() {
+        var ids = selectedIds();
+        if (!ids.length) { showMsg('Tick at least one question type (or press GCSE, AS, A2 or H446) and then press Refresh.'); el('questions').innerHTML = ''; return; }
+        showMsg('');
+        var code = el('code').value.trim();
+        if (!code) { code = String(ri(Math.random, 100000, 999999)); el('code').value = code; }
+        var n = Math.max(1, Math.min(50, parseInt(el('count').value, 10) || 10));
+        el('count').value = n;
+        render(generateSet(code, n, ids), code);
+        writeHash(code, n, ids, el('written').checked);
+      }
+
+      function loadFromHash() {
+        var h = (location.hash || '').replace(/^#/, '');
+        if (!h) return false;
+        var p;
+        try { p = new URLSearchParams(h); } catch (e) { return false; }
+        var t = (p.get('t') || '').split(',');
+        TYPES.forEach(function (ty) { el('t_' + ty.id).checked = t.indexOf(ty.id) >= 0; });
+        if (p.get('c')) el('code').value = p.get('c');
+        if (p.get('n')) el('count').value = p.get('n');
+        el('written').checked = p.get('w') === '1';
+        return t.some(function (x) { return x; });
+      }
+
+      function init() {
+        buildTable();
+        el('refresh').addEventListener('click', refresh);
+        el('rand').addEventListener('click', function () { el('code').value = String(ri(Math.random, 100000, 999999)); });
+        ['code', 'count'].forEach(function (id) { el(id).addEventListener('keydown', function (e) { if (e.key === 'Enter') refresh(); }); });
+        el('written').addEventListener('change', function () { el('questions').classList.toggle('written', el('written').checked); });
+        el('answers').addEventListener('change', function () { el('questions').classList.toggle('showans', el('answers').checked); });
+        if (loadFromHash()) refresh();
+      }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+    })();
+  </script>
+</body>
+
+</html>
