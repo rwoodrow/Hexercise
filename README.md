@@ -51,6 +51,6 @@ The question generators were checked by generating thousands of questions across
 
 ## Licence
 
-Released under the MIT Licence. See `LICENSE`.
+Released under the PolyForm Noncommercial License 1.0.0. See `LICENSE`.
 
-Copyright (c) 2026 Richard Woodrow (Greenhead College)
+Copyright (c) 2026 Richard Woodrow
