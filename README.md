@@ -53,4 +53,4 @@ The question generators were checked by generating thousands of questions across
 
 Released under the MIT Licence. See `LICENSE`.
 
-Copyright (c) 2026 YOUR NAME
+Copyright (c) 2026 Richard Woodrow (Greenhead College)
