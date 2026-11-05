@@ -25,6 +25,7 @@ A free, no-login practice tool for binary, hexadecimal and floating point. It ge
 1. Tick the question types you want, or press **GCSE**, **H446**, **AS** or **A2** to tick a whole level.
 2. Optionally enter a question code and the number of questions.
 3. Press **Refresh**.
+4. For FPB arithmetic questions click the question number to load a step-by-step working out panel.
 
 ### Marking rules
 
@@ -34,9 +35,7 @@ A free, no-login practice tool for binary, hexadecimal and floating point. It ge
 
 ## Hosting
 
-It is a single static `index.html` with no dependencies and no build step.
-
-1. Put `index.html` (and your `logo.png`, if you use one) in the root of a repository.
+1. Put `index.html`, js & css folder (and your `logo.png`, if you use one) in the root of a repository
 2. Go to **Settings → Pages**, choose **Deploy from a branch**, select `main` and `/ (root)`, then Save.
 
 ## Customising
